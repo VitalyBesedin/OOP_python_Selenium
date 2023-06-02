@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from login_page import LoginPage
 
 
 class TestFirst:
@@ -22,18 +23,9 @@ class TestFirst:
         # time.sleep(5)
 
         print("Start test")
-        login_standard_user = "standard_user"
-        password_all = "secret_sauce"
 
-        username = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//input[@data-test='username']")))
-        username.send_keys(login_standard_user)
-        print("Input login")
-        password = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#password")))
-        password.send_keys(password_all)
-        print("Input password")
-        button_login = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//input[@value='Login']")))
-        button_login.click()
-        print("Click login button")
+        login = LoginPage(driver)
+        login.authorization(login_name="standard_user", login_password="secret_sauce")
         time.sleep(2)
         select_product = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//button[@id='add-to-cart-sauce-labs-backpack']")))
         select_product.click()
