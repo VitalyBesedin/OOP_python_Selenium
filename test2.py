@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from login_page import LoginPage
 
 
-class TestFirst:
+class TestSecond:
     def test_select_product(self):
         # options = webdriver.ChromeOptions()
         # options.add_experimental_option("detach", True)
@@ -44,6 +44,6 @@ class TestFirst:
         time.sleep(5)
 
 
-test = TestFirst()
+test = TestSecond()
 test.test_select_product()
 
