@@ -23,11 +23,11 @@ class TestFirst:
         # time.sleep(5)
 
         print("Start test")
-        login_standard_user = "standard_user"
+        login_problem_user = "problem_user"
         password_all = "secret_sauce"
 
         login = LoginPage(driver)
-        login.authorization(login_standard_user, password_all)
+        login.authorization(login_problem_user, password_all)
         time.sleep(2)
         select_product = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//button[@id='add-to-cart-sauce-labs-backpack']")))
         select_product.click()
@@ -42,7 +42,6 @@ class TestFirst:
         assert value_success_test == "Your Cart"
         print("Test Success")
         time.sleep(5)
-
 
 
 test = TestFirst()
