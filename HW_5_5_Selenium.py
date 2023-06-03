@@ -1,5 +1,6 @@
 import time
 from selenium import webdriver
+from selenium.common import TimeoutException
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -10,41 +11,67 @@ from main_page import MainPage
 
 class TestHW:
     def test_select_product(self):
-        # options = webdriver.ChromeOptions()
-        # options.add_experimental_option("detach", True)
-        # g = Service()
-        # driver = webdriver.Chrome(options=options, service=g)  # this is and above macOS
-        # driver = webdriver.Chrome()  # Windows
-        # driver = webdriver.Firefox()
-        driver = webdriver.Safari()
-        # driver = webdriver.Edge()
-        base_url = 'https://www.saucedemo.com/'
-        driver.get(base_url)
-        driver.maximize_window()
-        # time.sleep(5)
 
-        print("Start test")
-        login_problem_user = "performance_glitch_user"
-        password_all = "secret_sauce"
 
-        login = LoginPage(driver)
-        login.authorization(login_problem_user, password_all)
-        time.sleep(2)
+        user_list = ['standard_user', 'locked_out_user', 'problem_user', 'performance_glitch_user']
 
-        select_product = MainPage(driver)
-        select_product.select_product("//button[@id='add-to-cart-sauce-labs-backpack']")
+        for i in range(len(user_list)):
+            # options = webdriver.ChromeOptions()
+            # options.add_experimental_option("detach", True)
+            # g = Service()
+            # driver = webdriver.Chrome(options=options, service=g)  # this is and above macOS
+            # driver = webdriver.Chrome()  # Windows
+            driver = webdriver.Firefox()
+            # driver = webdriver.Safari()
+            # driver = webdriver.Edge()
+            base_url = 'https://www.saucedemo.com/'
+            driver.get(base_url)
+            driver.maximize_window()
+            print("Start test", i + 1)
+            password_all = "secret_sauce"
+            login = LoginPage(driver)
+            login.authorization(user_list[i], password_all)
 
-        enter_shopping_cart = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//span[@class='shopping_cart_badge']")))
-        enter_shopping_cart.click()
-        print("Click Enter Shopping Cart")
+            try:
+                # url = "https://www.saucedemo.com/inventory.html"
+                # get_url = driver.current_url
+                # print(get_url)
+                # assert get_url == url
+                # print("Good URL")
+                success_login = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".title")))
+                value_success_login = success_login.text
+                print(value_success_login)
+                assert value_success_login == "Products"
+                print("Login Success")
+            except TimeoutException as exception:
+                # AssertionError
+                driver.refresh()
+                # login = LoginPage(driver)
+                # login.authorization(user_list[i], password_all)
+                # check_error = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//*[@id='login_button_container']/div/form/div[3]/h3/text()")))
+                # value_check_error = check_error.text
+                # print(value_check_error)
+                # assert value_check_error == "Epic sadface: Sorry, this user has been locked out."
+                print("Login Unsuccessful")
+                driver.quit()
+                print("Test Success", i + 1)
+                continue
 
-        success_test = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//span[@class='title']")))
-        value_success_test = success_test.text
-        print(value_success_test)
-        assert value_success_test == "Your Cart"
-        print("Test Success")
-        time.sleep(5)
-user_list = ['standard_user', 'locked_out_user', 'problem_user', 'performance_glitch_user']
+            select_product = MainPage(driver)
+            select_product.select_product("//button[@id='add-to-cart-sauce-labs-backpack']")
+            enter_shopping_cart = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//span[@class='shopping_cart_badge']")))
+            enter_shopping_cart.click()
+            print("Click Enter Shopping Cart")
+
+            success_test = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//span[@class='title']")))
+            value_success_test = success_test.text
+            print(value_success_test)
+            assert value_success_test == "Your Cart"
+            print("Test Success", i + 1)
+            time.sleep(2)
+            driver.quit()
+
+
 
 test = TestHW()
 test.test_select_product()
