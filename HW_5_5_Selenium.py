@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from login_page import LoginPage
 
 
-class TestSecond:
+class TestHW:
     def test_select_product(self):
         # options = webdriver.ChromeOptions()
         # options.add_experimental_option("detach", True)
@@ -23,7 +23,7 @@ class TestSecond:
         # time.sleep(5)
 
         print("Start test")
-        login_problem_user = "problem_user"
+        login_problem_user = "performance_glitch_user"
         password_all = "secret_sauce"
 
         login = LoginPage(driver)
@@ -44,7 +44,7 @@ class TestSecond:
         time.sleep(5)
 user_list = ['standard_user', 'locked_out_user', 'problem_user', 'performance_glitch_user']
 
-test = TestSecond()
+test = TestHW()
 test.test_select_product()
 time.sleep(5)
 
