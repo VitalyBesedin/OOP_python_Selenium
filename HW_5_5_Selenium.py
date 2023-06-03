@@ -32,26 +32,13 @@ class TestHW:
             login = LoginPage(driver)
             login.authorization(user_list[i], password_all)
 
-            try:
-                # url = "https://www.saucedemo.com/inventory.html"
-                # get_url = driver.current_url
-                # print(get_url)
-                # assert get_url == url
-                # print("Good URL")
+            try: # positive test
                 success_login = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".title")))
                 value_success_login = success_login.text
                 print(value_success_login)
                 assert value_success_login == "Products"
                 print("Login Success")
-            except TimeoutException as exception:
-                # AssertionError
-                driver.refresh()
-                # login = LoginPage(driver)
-                # login.authorization(user_list[i], password_all)
-                # check_error = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//*[@id='login_button_container']/div/form/div[3]/h3/text()")))
-                # value_check_error = check_error.text
-                # print(value_check_error)
-                # assert value_check_error == "Epic sadface: Sorry, this user has been locked out."
+            except TimeoutException as exception: # negative test
                 print("Login Unsuccessful")
                 driver.quit()
                 print("Test Success", i + 1)
@@ -71,9 +58,9 @@ class TestHW:
             time.sleep(2)
             driver.quit()
 
-
-
+print("Start Set of Tests")
 test = TestHW()
 test.test_select_product()
 time.sleep(5)
+print("End Set of Tests")
 
