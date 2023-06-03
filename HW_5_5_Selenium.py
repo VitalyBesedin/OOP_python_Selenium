@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from login_page import LoginPage
+from main_page import MainPage
 
 
 class TestHW:
@@ -29,9 +30,10 @@ class TestHW:
         login = LoginPage(driver)
         login.authorization(login_problem_user, password_all)
         time.sleep(2)
-        select_product = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//button[@id='add-to-cart-sauce-labs-backpack']")))
-        select_product.click()
-        print("Click Select Product")
+
+        select_product = MainPage(driver)
+        select_product.select_product("//button[@id='add-to-cart-sauce-labs-backpack']")
+
         enter_shopping_cart = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//span[@class='shopping_cart_badge']")))
         enter_shopping_cart.click()
         print("Click Enter Shopping Cart")
