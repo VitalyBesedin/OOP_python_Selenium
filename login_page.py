@@ -21,3 +21,7 @@ class LoginPage:
             EC.element_to_be_clickable((By.XPATH, "//input[@value='Login']")))
         button_login.click()
         print("Click login button")
+
+    def cancel_wrong_login(self):
+        button_red_cross = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "svg.svg-inline--fa.fa-times.fa-w-11")))
+        button_red_cross.click()
