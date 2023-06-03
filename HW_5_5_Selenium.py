@@ -42,8 +42,9 @@ class TestSecond:
         assert value_success_test == "Your Cart"
         print("Test Success")
         time.sleep(5)
-
+user_list = ['standard_user', 'locked_out_user', 'problem_user', 'performance_glitch_user']
 
 test = TestSecond()
 test.test_select_product()
+time.sleep(5)
 
