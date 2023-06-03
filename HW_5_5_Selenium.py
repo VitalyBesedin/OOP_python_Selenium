@@ -14,17 +14,6 @@ class TestHW:
 
 
         user_list = ['standard_user', 'locked_out_user', 'problem_user', 'performance_glitch_user']
-        # options = webdriver.ChromeOptions()
-        # options.add_experimental_option("detach", True)
-        # g = Service()
-        # driver = webdriver.Chrome(options=options, service=g)  # this is and above macOS
-        # driver = webdriver.Chrome()  # Windows
-        # driver = webdriver.Firefox()
-        # driver = webdriver.Safari()
-        # driver = webdriver.Edge()
-        # base_url = 'https://www.saucedemo.com/'
-        # driver.get(base_url)
-        # driver.maximize_window()
 
         for i in range(len(user_list)):
 
@@ -34,8 +23,8 @@ class TestHW:
             # g = Service()
             # driver = webdriver.Chrome(options=options, service=g)  # this is and above macOS
             # driver = webdriver.Chrome()  # Windows
-            driver = webdriver.Firefox()
-            # driver = webdriver.Safari()
+            # driver = webdriver.Firefox()
+            driver = webdriver.Safari()
             # driver = webdriver.Edge()
             base_url = 'https://www.saucedemo.com/'
             driver.get(base_url)
@@ -52,7 +41,6 @@ class TestHW:
                 print("Login Success")
             except TimeoutException as exception: # negative test
                 print("Login Unsuccessful")
-                # driver.refresh()
                 driver.quit()
                 print("Test Success", i + 1)
                 continue
@@ -67,7 +55,6 @@ class TestHW:
             assert value_success_test == "Your Cart"
             print("Test Success", i + 1)
             time.sleep(2)
-            # select_product.enter_item_main_menu(3)
             driver.quit()
 
 print("Start Set of Tests")
