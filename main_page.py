@@ -27,11 +27,3 @@ class MainPage:
         link_about = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, self.main_menu_items[item-1])))
         link_about.click()
         print("Click link menu")
-
-
-
-
-
-
-
-

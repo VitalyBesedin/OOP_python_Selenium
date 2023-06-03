@@ -15,4 +15,3 @@ class CartPage:
         remove_product = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.remove_items[item-1])))
         remove_product.click()
         print("Click Remove Product")
-

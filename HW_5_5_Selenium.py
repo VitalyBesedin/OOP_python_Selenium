@@ -11,8 +11,6 @@ from main_page import MainPage
 
 class TestHW:
     def test_select_product(self):
-
-
         user_list = ['standard_user', 'locked_out_user', 'problem_user', 'performance_glitch_user']
 
         for i in range(len(user_list)):
@@ -48,7 +46,6 @@ class TestHW:
             select_product = MainPage(driver)
             select_product.select_product("#add-to-cart-sauce-labs-backpack")
             select_product.click_enter_shopping_cart()
-
             success_test = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//span[@class='title']")))
             value_success_test = success_test.text
             print(value_success_test)
@@ -62,4 +59,3 @@ test = TestHW()
 test.test_select_product()
 time.sleep(5)
 print("End Set of Tests")
-
